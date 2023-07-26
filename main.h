@@ -11,7 +11,7 @@
  * @f: pointer that points to printer functions
  * Description: A type of struct soring pointers to printer funcs
  */
-tpedef struct print
+typedef struct print
 {
 	char *type_arg;
 	int (*f)(va_list, char *, unsigned int);

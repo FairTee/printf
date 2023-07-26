@@ -57,7 +57,7 @@ int prinlhex(va_list arguments, char *buf, unsigned int buffx)
 	char *hex, *bin;
 
 	int_input = va_arg(arguments, long int);
-	neg = 0
+	neg = 0;
 		if (int_input == 0)
 		{
 			buffx = handl_buf(buf, '0', buffx);
@@ -65,7 +65,7 @@ int prinlhex(va_list arguments, char *buf, unsigned int buffx)
 		}
 	if (int_input < 0)
 	{
-		int_input = (ont_input * -1) - 1;
+		int_input = (int_input * -1) - 1;
 		neg = 1;
 	}
 
@@ -99,7 +99,7 @@ int prinlhex(va_list arguments, char *buf, unsigned int buffx)
 int prinlint(va_list arguments, char *buf, unsigned int buffx)
 {
 	long int int_input;
-	unsigned long int int_input, temp, x, over, neg;
+	unsigned long int int_in, temp, x, over, neg;
 
 	int_input = va_arg(arguments, long int);
 	neg = 0;

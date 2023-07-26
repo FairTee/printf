@@ -79,7 +79,7 @@ int prinnhex(va_list arguments, char *buf, unsigned int buffx)
 	bin = malloc(sizeof(char) * (32 + 1));
 	bin = fill_binary_array(bin, int_input, neg, 32);
 	hex = malloc(sizeof(char) * (8 + 1));
-	hex = fill_hex_array(bin, hex[x], 0, 8);
+	hex = fill_hex_array(bin, hex, 0, 8);
 	for (first_num = x = count = 0; hex[x]; x++)
 	{
 		if (hex[x] != '0' && first_num == 0)

@@ -58,7 +58,7 @@ int prinhhex(va_list arguments, char *buf, unsigned int buffx)
 	neg = 0;
 	if (int_input == 0)
 	{
-		buffx = handl_buff(buf, '0', buffx);
+		buffx = handl_buf(buf, '0', buffx);
 		return (1);
 	}
 	if (int_input < 0)
@@ -116,9 +116,9 @@ int prinhint(va_list arguments, char *buf, unsigned int buffx)
 		over *= 10;
 		temp /= 10;
 	}
-	for (x = 0; over > 0; over /=, x++)
+	for (x = 0; over > 0; over /= 10, x++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 1)0 + '0', buffx);
+		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
 	}
 	return (x + neg);
 }
@@ -134,7 +134,7 @@ int prinhupx(va_list arguments, char *buf, unsigned int buffx)
 	short int int_input, x, neg, count, first_num;
 	char *hex, *bin;
 
-	int_input va_arg(arguments, int);
+	int_input = va_arg(arguments, int);
 	neg = 0;
 
 	if (int_input == 0)
@@ -159,7 +159,7 @@ int prinhupx(va_list arguments, char *buf, unsigned int buffx)
 			first_num = 1;
 		if (first_num)
 		{
-			buffx = handl_buf(buf, hex[x], buff);
+			buffx = handl_buf(buf, hex[x], buffx);
 			count++;
 		}
 	}

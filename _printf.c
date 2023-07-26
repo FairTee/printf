@@ -7,8 +7,10 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int x = 0, lens = 0, buffx = 0, char *buffer;
-	int (*function)(va_list, char *, unsigned int), va_list arguments;
+	unsigned int x = 0, len = 0, buffx = 0;
+	char *buffer;
+	int (*function)(va_list, char *, unsigned int);
+	va_list arguments;
 
 	va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
 	if (!format || !buffer || (format[x] == '%' && !format[x + 1]))
@@ -31,20 +33,20 @@ int _printf(const char *format, ...)
 				{
 					if (format[x + 1] == ' ' && !format[x + 2])
 						return (-1);
-					handl_buf(buffer, format[x], buffx), lens++, x--;
+					handl_buf(buffer, format[x], buffx), len++, x--;
 				}
 				else
 				{
-					lens += function(arguments, buffer, buffx);
+					len += function(arguments, buffer, buffx);
 					x += ev_print_func(format, x + 1);
 				}
 			} x++;
 		}
 		else
-			handl_buf(buffer, format[x], buffx), lens++;
-		for (buffx = lens; buffx > 1024; buffx -= 1024)
+			handl_buf(buffer, format[x], buffx), len++;
+		for (buffx = len; buffx > 1024; buffx -= 1024)
 			;
 	}
 	print_buf(buffer, buffx), free(buffer), va_end(arguments);
-	return (lens);
+	return (len);
 }

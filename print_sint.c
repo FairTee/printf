@@ -29,7 +29,7 @@ int printsint(va_list arguments, char *buf, unsigned int buffx)
 		over *= 10;
 		temp /= 10;
 	}
-	for (x = 0; over > 0; over /= 10; x++)
+	for (x = 0; over > 0; over /= 10, x++)
 	{
 		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
 	}

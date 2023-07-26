@@ -40,11 +40,11 @@ int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 	int x = 0, j = 0, first_index;
 
 	first_index = index;
-	while (pr[x].type_argh)
+	while (pr[x].type_arg)
 	{
 		if (s[index] == pr[x]. type_arg[j])
 		{
-			if (pr[i].type_arg[j + 1] != '\0')
+			if (pr[x].type_arg[j + 1] != '\0')
 				index++, j++;
 			else
 				break;
@@ -53,10 +53,10 @@ int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 		{
 			j = 0;
 			x++;
-			index = firsy index;
+			index = first_index;
 		}
 	}
-	return (ptr[x].f);
+	return (pr[x].f);
 }
 
 /**
@@ -90,11 +90,11 @@ int ev_print_func(const char *s, int index)
 	int x = 0, j = 0, first_index;
 
 	first_index = index;
-	while (pr[i].type_arg)
+	while (pr[x].type_arg)
 	{
-		if (s[index] == pr[i].type_arg[j])
+		if (s[index] == pr[x].type_arg[j])
 		{
-			if (pr[i].type_arg[j + 1] != '\0')
+			if (pr[x].type_arg[j + 1] != '\0')
 				index++, j++;
 			else
 				break;
