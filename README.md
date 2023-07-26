@@ -1,6 +1,5 @@
 C - PRINTF
-FIles for this project include: long_print.c, shortPrint.c, flag_charc.c, print_specifiers.c, length_mod.c, func_output.c, fine_print.c, leopard_print.c, conv_specifier.c, rev_string.c, string_rot_13.c, func_print.c
-
+FIles for this project include: 0-func.c, 1-func.c, 2-func.c, flag_charc.c, conv_prec.c, just_size.c, place_width.c, print_handl.c, cust_specs.c, handle_buff.c
 These are programs that;
 1.writes function that produces output according to a format.
 2.Handle the following conversion specifiers:d,i
