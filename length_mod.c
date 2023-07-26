@@ -1,57 +1,54 @@
 #include "main.h"
-
 /**
- * prinhunt - prints short unsigned integers
- * @arguments: numbers to print
- * @buf: buffer ptr
- * @buffx:index for buffer ptr
- * Return: characters printed
+ * prinhunt - prints a short unsigned integer
+ * @arguments: number to print
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-
-int prinhunt(va_list arguments, char *buf, unsigned int buffx)
+int prinhunt(va_list arguments, char *buf, unsigned int ibuf)
 {
-	unsigned short int int_in, temp, x, over;
+	unsigned short int int_in, int_temp, i, div;
 
 	int_in = va_arg(arguments, unsigned int);
 
-	temp = int_in;
-	over = 1;
+	int_temp = int_in;
+	div = 1;
 
-	while (temp > 9)
+	while (int_temp > 9)
 	{
-		over *= 10;
-		temp /= 10;
+		div *= 10;
+		int_temp /= 10;
 	}
 
-	for (x = 0; over > 0; over /= 10, x++)
+	for (i = 0; div > 0; div /= 10, i++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
 	}
-	return (x);
+	return (i);
 }
-
 /**
- * prinlunt - prints a long unsigned number
+ * prinlunt - prints a long unsigned integer
  * @arguments: number to print
- * @buf: buffer ptr
- * @buffx: index for buffer ptr
- * Return: characters printed
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-int prinlunt(va_list arguments, char *buf, unsigned int buffx)
+int prinlunt(va_list arguments, char *buf, unsigned int ibuf)
 {
-	unsigned long int int_in, temp, x, over;
+	unsigned long int int_in, int_temp, i, div;
 
 	int_in = va_arg(arguments, unsigned long int);
-	temp = int_in;
-	over = 1;
-	while (temp > 9)
+	int_temp = int_in;
+	div = 1;
+	while (int_temp > 9)
 	{
-		over *= 10;
-		temp /= 10;
+		div *= 10;
+		int_temp /= 10;
 	}
-	for (x = 0; over > 0; over /= 10, x++)
+	for (i = 0; div > 0; div /= 10, i++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
 	}
-	return (x);
+	return (i);
 }

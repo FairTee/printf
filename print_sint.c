@@ -1,37 +1,38 @@
 #include "main.h"
+
 /**
- * printsint - prints int starting with space
+ * prinsint - prints int begining with space
  * @arguments: input string
- * @buf: buffer ptr
- * @buffx: index for buffer ptr
- * Return: characters printed
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed
  */
-int printsint(va_list arguments, char *buf, unsigned int buffx)
+int prinsint(va_list arguments, char *buf, unsigned int ibuf)
 {
 	int int_input;
-	unsigned int int_in, temp, x, over;
+	unsigned int int_in, int_temp, i, div;
 
 	int_input = va_arg(arguments, int);
 	if (int_input < 0)
 	{
 		int_in = int_input * -1;
-		buffx = handl_buf(buf, '-', buffx);
+		ibuf = handl_buf(buf, '-', ibuf);
 	}
 	else
 	{
 		int_in = int_input;
-		buffx = handl_buf(buf, ' ', buffx);
+		ibuf = handl_buf(buf, ' ', ibuf);
 	}
-	temp = int_in;
-	over = 1;
-	while (temp > 9)
+	int_temp = int_in;
+	div = 1;
+	while (int_temp > 9)
 	{
-		over *= 10;
-		temp /= 10;
+		div *= 10;
+		int_temp /= 10;
 	}
-	for (x = 0; over > 0; over /= 10, x++)
+	for (i = 0; div > 0; div /= 10, i++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
 	}
-	return (x + 1);
+	return (i + 1);
 }

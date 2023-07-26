@@ -1,153 +1,152 @@
 #include "main.h"
 /**
- * print_unt - prints unsigned int
- * @arguments: number to be printed
- * @buf: buffer ptr
- * @buffx: index buffer ptr
- * Return: characters printed
+ * print_unt - prints an unsigned int
+ * @arguments: number to print
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-int print_unt(va_list arguments, char *buf, unsigned int buffx)
+int print_unt(va_list arguments, char *buf, unsigned int ibuf)
 {
-	unsigned int int_in, temp, x, over;
+	unsigned int int_in, int_temp, i, div;
 
 	int_in = va_arg(arguments, unsigned int);
-	temp = int_in;
-	over = 1;
-	while (temp > 9)
+	int_temp = int_in;
+	div = 1;
+	while (int_temp > 9)
 	{
-		over *= 10;
-		temp /= 10;
+		div *= 10;
+		int_temp /= 10;
 	}
-	for (x = 0; over > 0; over /= 10, x++)
+	for (i = 0; div > 0; div /= 10, i++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
 	}
-	return (x);
+	return (i);
 }
 /**
- * print_oct - prints decimal in oct
+ * print_oct - prints decimal number in octal
  * @arguments: input number
- * @buf: buffer ptr
- * @buffx: index buffer ptr
- * Return: characters printed
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-int print_oct(va_list arguments, char *buf, unsigned int buffx)
+int print_oct(va_list arguments, char *buf, unsigned int ibuf)
 {
-	int int_input, x, neg, count, first_num;
-	char *oct, *bin;
+	int int_input, i, isnegative, count, first_digit;
+	char *octal, *binary;
 
 	int_input = va_arg(arguments, int);
-	neg = 0;
+	isnegative = 0;
 	if (int_input == 0)
 	{
-		buffx = handl_buf(buf, '0', buffx);
+		ibuf = handl_buf(buf, '0', ibuf);
 		return (1);
 	}
-
 	if (int_input < 0)
 	{
 		int_input = (int_input * -1) - 1;
-		neg = 1;
+		isnegative = 1;
 	}
-	bin = malloc(sizeof(char) * (32 + 1));
-	bin = fill_binary_array(bin, int_input, neg, 32);
-	oct = malloc(sizeof(char) * (11 + 1));
-	oct = fill_oct_array(bin, oct);
-	for (first_num = x = count = 0; oct[x]; x++)
+	binary = malloc(sizeof(char) * (32 + 1));
+	binary = fill_binary_array(binary, int_input, isnegative, 32);
+	octal = malloc(sizeof(char) * (11 + 1));
+	octal = fill_oct_array(binary, octal);
+	for (first_digit = i = count = 0; octal[i]; i++)
 	{
-		if (oct[x] != '0' && first_num == 0)
-			first_num = 1;
-		if (first_num)
+		if (octal[i] != '0' && first_digit == 0)
+			first_digit = 1;
+		if (first_digit)
 		{
-			buffx = handl_buf(buf, oct[x], buffx);
+			ibuf = handl_buf(buf, octal[i], ibuf);
 			count++;
 		}
 	}
-	free(bin);
-	free(oct);
+	free(binary);
+	free(octal);
 	return (count);
 }
 /**
- * print_hex - prints a dec in hexa
+ * print_hex - prints a decimal in hexadecimal
  * @arguments: input string
- * @buf: buffer ptr
- * @buffx: index for ptr
- * Return: characters printed
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed
  */
-int print_hex(va_list arguments, char *buf, unsigned int buffx)
+int print_hex(va_list arguments, char *buf, unsigned int ibuf)
 {
-	int int_input, x, neg, count, first_num;
-	char *hex, *bin;
+	int int_input, i, isnegative, count, first_digit;
+	char *hexadecimal, *binary;
 
 	int_input = va_arg(arguments, int);
-	neg = 0;
+	isnegative = 0;
 	if (int_input == 0)
 	{
-		buffx = handl_buf(buf, '0', buffx);
+		ibuf = handl_buf(buf, '0', ibuf);
 		return (1);
 	}
 	if (int_input < 0)
 	{
 		int_input = (int_input * -1) - 1;
-		neg = 1;
+		isnegative = 1;
 	}
-	bin = malloc(sizeof(char) * (32 + 1));
-	bin = fill_binary_array(bin, int_input, neg, 32);
-	hex = malloc(sizeof(char) * (8 + 1));
-	hex = fill_hex_array(bin, hex, 0, 8);
-	for (first_num = x = count = 0; hex[x]; x++)
+	binary = malloc(sizeof(char) * (32 + 1));
+	binary = fill_binary_array(binary, int_input, isnegative, 32);
+	hexadecimal = malloc(sizeof(char) * (8 + 1));
+	hexadecimal = fill_hex_array(binary, hexadecimal, 0, 8);
+	for (first_digit = i = count = 0; hexadecimal[i]; i++)
 	{
-		if (hex[x] != '0' && first_num == 0)
-			first_num = 1;
-		if (first_num)
+		if (hexadecimal[i] != '0' && first_digit == 0)
+			first_digit = 1;
+		if (first_digit)
 		{
-			buffx = handl_buf(buf, hex[x], buffx);
-				count++;
-		}
-	}
-	free(bin);
-	free(hex);
-	return (count);
-}
-/**
- * print_upx - prints a decimal in hex
- * @arguments: character
- * @buf: buffer ptr
- * @buffx: index to buffer ptr
- * Return: characters printed
- */
-int print_upx(va_list arguments, char *buf, unsigned int buffx)
-{
-	int int_input, x, neg, count, first_num;
-	char *hex, *bin;
-
-	int_input = va_arg(arguments, int);
-	neg = 0;
-	if (int_input == 0)
-	{
-		buffx = handl_buf(buf, '0', buffx);
-		return (1);
-	}
-	if (int_input < 0)
-	{
-		int_input = (int_input * -1) - 1;
-		neg = 1;
-	}
-	bin = malloc(sizeof(char) * (32 + 1));
-	bin = fill_binary_array(bin, int_input, neg, 32);
-	hex = malloc(sizeof(char) * (8 + 1));
-	hex = fill_hex_array(bin, hex, 1, 8);
-	for (first_num = x = count = 0; hex[x]; x++)
-	{
-		if (hex[x] != '0' && first_num == 0)
-			first_num = 1;
-		if (first_num)
-		{
-			buffx = handl_buf(buf, hex[x], buffx);
+			ibuf = handl_buf(buf, hexadecimal[i], ibuf);
 			count++;
 		}
 	}
-	free(bin);
-	free(hex);
+	free(binary);
+	free(hexadecimal);
+	return (count);
+}
+/**
+ * print_upx - prints a decimal in hexadecimal
+ * @arguments: The character to print
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed
+ */
+int print_upx(va_list arguments, char *buf, unsigned int ibuf)
+{
+	int int_input, i, isnegative, count, first_digit;
+	char *hexadecimal, *binary;
+
+	int_input = va_arg(arguments, int);
+	isnegative = 0;
+	if (int_input == 0)
+	{
+		ibuf = handl_buf(buf, '0', ibuf);
+		return (1);
+	}
+	if (int_input < 0)
+	{
+		int_input = (int_input * -1) - 1;
+		isnegative = 1;
+	}
+	binary = malloc(sizeof(char) * (32 + 1));
+	binary = fill_binary_array(binary, int_input, isnegative, 32);
+	hexadecimal = malloc(sizeof(char) * (8 + 1));
+	hexadecimal = fill_hex_array(binary, hexadecimal, 1, 8);
+	for (first_digit = i = count = 0; hexadecimal[i]; i++)
+	{
+		if (hexadecimal[i] != '0' && first_digit == 0)
+			first_digit = 1;
+		if (first_digit)
+		{
+			ibuf = handl_buf(buf, hexadecimal[i], ibuf);
+			count++;
+		}
+	}
+	free(binary);
+	free(hexadecimal);
 	return (count);
 }
