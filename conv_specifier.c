@@ -13,8 +13,8 @@ int print_add(va_list arguments, char *buf, unsigned int buffx)
 {
 	void *add;
 	long int int_input;
-	int x, count, first_num, neg;
-	char *hex, *bin;
+	int x, count, first_num, isneg;
+	char *hex, *binary;
 	char nill[] = "(nil)";
 
 	add = (va_arg(arguments, void *));
@@ -25,16 +25,16 @@ int print_add(va_list arguments, char *buf, unsigned int buffx)
 		return (5);
 	}
 	int_input = (intptr_t)add;
-	neg = 0;
+	isneg = 0;
 	if (int_input < 0)
 	{
 		int_input = (int_input * -1) - 1;
-		neg = 1;
+		isneg = 1;
 	}
-	bin = malloc(sizeof(char) * (64 + 1));
-	bin = fill_binary_array(bin, int_input, neg, 64);
+	binary = malloc(sizeof(char) * (64 + 1));
+	binary = fill_binary_array(binary, int_input, isneg, 64);
 	hex = malloc(sizeof(char) * (16 + 1));
-	hex = fill_hex_array(bin, hex, 0, 16);
+	hex = fill_hex_array(binary, hex, 0, 16);
 	buffx = handl_buf(buf, '0', buffx);
 	buffx = handl_buf(buf, 'x', buffx);
 	for (first_num = x = count = 0; hex[x]; x++)
@@ -47,7 +47,7 @@ int print_add(va_list arguments, char *buf, unsigned int buffx)
 			count++;
 		}
 	}
-	free(bin);
+	free(binary);
 	free(hex);
 	return (count + 2);
 }
