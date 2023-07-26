@@ -1,43 +1,42 @@
 #include "main.h"
 
 /**
- * print_bnr - prints in binary
- * @arguments: input
- * @buf: buffer
- * @buffx: index for buffer
- * Return: number of chars
+ * print_bnr - prints decimal in binary
+ * @arguments: input string
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-
-int print_bnr(va_list arguments, char *buf, unsigned int buffx)
+int print_bnr(va_list arguments, char *buf, unsigned int ibuf)
 {
-	int int_input, count, x, first_one, neg;
-	char *bin;
+	int int_input, count, i, first_one, isnegative;
+	char *binary;
 
 	int_input = va_arg(arguments, int);
-	neg = 0;
+	isnegative = 0;
 	if (int_input == 0)
 	{
-		buffx = handl_buf(buf, '0', buffx);
+		ibuf = handl_buf(buf, '0', ibuf);
 		return (1);
 	}
 	if (int_input < 0)
 	{
 		int_input = (int_input * -1) - 1;
-		neg = 1;
+		isnegative = 1;
 	}
-	bin = malloc(sizeof(char) * (32 + 1));
-	bin = fill_binary_array(bin, int_input, neg, 32);
+	binary = malloc(sizeof(char) * (32 + 1));
+	binary = fill_binary_array(binary, int_input, isnegative, 32);
 	first_one = 0;
-	for (count = x = 0; bin[x]; x++)
+	for (count = i = 0; binary[i]; i++)
 	{
-		if (first_one == 0 && bin[x] == '1')
+		if (first_one == 0 && binary[i] == '1')
 			first_one = 1;
 		if (first_one == 1)
 		{
-			buffx = handl_buf(buf, bin[x], buffx);
+			ibuf = handl_buf(buf, binary[i], ibuf);
 			count++;
 		}
 	}
-	free(bin);
+	free(binary);
 	return (count);
 }

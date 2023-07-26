@@ -1,12 +1,10 @@
 #include "main.h"
-
 /**
- * get_print_func - prints the correct function
- * @s: argument identifier
- * @index: index for argument identifier
- * Return: pointer to a function
+ * get_print_func - selects the correct function to perform the operation.
+ * @s: argument indentifier
+ * @index: index for argument indentifier
+ * Return: pointer to a function.
  */
-
 int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 {
 	print_t pr[] = {
@@ -37,14 +35,14 @@ int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 		{"+ i", prinpint}, {"+ d", prinpint},
 		{" %", print_prg}, {NULL, NULL},
 	};
-	int x = 0, j = 0, first_index;
+	int i = 0, j = 0, first_index;
 
 	first_index = index;
-	while (pr[x].type_arg)
+	while (pr[i].type_arg)
 	{
-		if (s[index] == pr[x]. type_arg[j])
+		if (s[index] == pr[i].type_arg[j])
 		{
-			if (pr[x].type_arg[j + 1] != '\0')
+			if (pr[i].type_arg[j + 1] != '\0')
 				index++, j++;
 			else
 				break;
@@ -52,12 +50,14 @@ int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 		else
 		{
 			j = 0;
-			x++;
+			i++;
 			index = first_index;
 		}
 	}
-	return (pr[x].f);
+	return (pr[i].f);
 }
+
+#include "main.h"
 
 /**
  * ev_print_func - returns the amount of identifiers.
@@ -87,14 +87,14 @@ int ev_print_func(const char *s, int index)
 		{"+ i", prinpint}, {"+ d", prinpint}, {" %", print_prg},
 		{NULL, NULL},
 	};
-	int x = 0, j = 0, first_index;
+	int i = 0, j = 0, first_index;
 
 	first_index = index;
-	while (pr[x].type_arg)
+	while (pr[i].type_arg)
 	{
-		if (s[index] == pr[x].type_arg[j])
+		if (s[index] == pr[i].type_arg[j])
 		{
-			if (pr[x].type_arg[j + 1] != '\0')
+			if (pr[i].type_arg[j + 1] != '\0')
 				index++, j++;
 			else
 				break;
@@ -102,7 +102,7 @@ int ev_print_func(const char *s, int index)
 		else
 		{
 			j = 0;
-			x++;
+			i++;
 			index = first_index;
 		}
 	}

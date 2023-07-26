@@ -1,41 +1,41 @@
 #include "main.h"
 
 /**
- * print_rot - writes in ROT13
- * @arguments: input
- * @buf: buffer
- * @buffx: index for buffer
- * Return: number of chars
+ * print_rot - writes the str in ROT13
+ * @arguments: input string
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
 
-int print_rot(va_list arguments, char *buf, unsigned int buffx)
+int print_rot(va_list arguments, char *buf, unsigned int ibuf)
 {
 	char alf[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char rot[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 	char *str;
-	unsigned int x, j, k;
+	unsigned int i, j, k;
 	char nill[] = "(avyy)";
 
 	str = va_arg(arguments, char *);
 	if (str == NULL)
 	{
-		for (x = 0; nill[x]; x++)
-			buffx = handl_buf(buf, nill[x], buffx);
+		for (i = 0; nill[i]; i++)
+			ibuf = handl_buf(buf, nill[i], ibuf);
 		return (6);
 	}
-	for (x = 0; str[x]; x++)
+	for (i = 0; str[i]; i++)
 	{
 		for (k = j = 0; alf[j]; j++)
 		{
-			if (str[x] == alf[j])
+			if (str[i] == alf[j])
 			{
 				k = 1;
-				buffx = handl_buf(buf, rot[j], buffx);
+				ibuf = handl_buf(buf, rot[j], ibuf);
 				break;
 			}
 		}
 		if (k == 0)
-			buffx = handl_buf(buf, str[x], buffx);
+			ibuf = handl_buf(buf, str[i], ibuf);
 	}
-	return (x);
+	return (i);
 }

@@ -2,32 +2,32 @@
 
 /**
  * print_buf - prints buffer
- * @buf: buffer
- * @nbuf: number of bytes
- * Return: number of bytes
+ * @buf: buffer pointer
+ * @nbuf: number of bytes to print
+ * Return: number of bytes printed.
  */
-
 int print_buf(char *buf, unsigned int nbuf)
 {
 	return (write(1, buf, nbuf));
 }
 
-/**
- * handl_buf - concatenates the characters
- * @buf: buffer
- * @c: character
- * @buffx: index of buffer
- * Return: index of pointer
- */
+#include "main.h"
 
-unsigned int handl_buf(char *buf, char c, unsigned int buffx)
+/**
+ * handl_buf - concatenates the buffer characters
+ * @buf: buffer pointer
+ * @c: charcter to concatenate
+ * @ibuf: index of buffer pointer
+ * Return: index of buffer pointer.
+ */
+unsigned int handl_buf(char *buf, char c, unsigned int ibuf)
 {
-	if (buffx == 1024)
+	if (ibuf == 1024)
 	{
-		print_buf(buf, buffx);
-		buffx = 0;
+		print_buf(buf, ibuf);
+		ibuf = 0;
 	}
-	buf[buffx] = c;
-	buffx++;
-	return (buffx);
+	buf[ibuf] = c;
+	ibuf++;
+	return (ibuf);
 }

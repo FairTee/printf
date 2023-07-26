@@ -2,23 +2,22 @@
 
 /**
  * print_int - prints an integer
- * @arguments: input
+ * @arguments: input string
  * @buf: buffer pointer
- * @buffx: an index
- * Return: total of chars
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-
-int print_int(va_list arguments, char *buf, unsigned int buffx)
+int print_int(va_list arguments, char *buf, unsigned int ibuf)
 {
 	int int_input;
-	unsigned int int_in, temp, x, over, isneg;
+	unsigned int int_in, int_temp, i, div, isneg;
 
 	int_input = va_arg(arguments, int);
 	isneg = 0;
 	if (int_input < 0)
 	{
 		int_in = int_input * -1;
-		buffx = handl_buf(buf, '-', buffx);
+		ibuf = handl_buf(buf, '-', ibuf);
 		isneg = 1;
 	}
 	else
@@ -26,18 +25,18 @@ int print_int(va_list arguments, char *buf, unsigned int buffx)
 		int_in = int_input;
 	}
 
-	temp = int_in;
-	over = 1;
+	int_temp = int_in;
+	div = 1;
 
-	while (temp > 9)
+	while (int_temp > 9)
 	{
-		over *= 10;
-		temp /= 10;
+		div *= 10;
+		int_temp /= 10;
 	}
 
-	for (x = 0; over > 0; over /= 10, x++)
+	for (i = 0; div > 0; div /= 10, i++)
 	{
-		buffx = handl_buf(buf, ((int_in / over) % 10) + '0', buffx);
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
 	}
-	return (x + isneg);
+	return (i + isneg);
 }
